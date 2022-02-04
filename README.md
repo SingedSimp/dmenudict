@@ -4,6 +4,8 @@ You will need to set your font manually in the config.json file, but the default
 
 It also requires xclip, but that can be removed by changing config.json
 
+In the config.json file, the tag "flags" can be used to include any argument in your dmenu command.
+
 You will need to create a JSON file named `creds.json` in the cloned repo. This will contain the `app_key` and `app_id` needed for the Oxford Dictionary API. To retrieve your values, create an account and application at the [OxfordDictionary website](https://developer.oxforddictionaries.com/). Once you've created your application, get your `app_key` and `app_id` from the API Credentials page.
 
 ```json
