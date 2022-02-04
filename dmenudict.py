@@ -33,7 +33,7 @@ def get_all_definitions(results):
 
 # Display definitions in Rofi
 def display_definitions(menu, title):
-	proc = Popen(f'dmenu -l 10 -i -p "{title}" -fn {config["font"]}', stdout=PIPE, stdin=PIPE, shell=True, text=True)
+	proc = Popen(f'dmenu -l 10 -i -p "{title}" -fn {config["font"]} {config["flags"]}', stdout=PIPE, stdin=PIPE, shell=True, text=True)
 	ans = proc.communicate("\n".join(menu))[0].strip()
 
 	if ans == "":
@@ -51,7 +51,7 @@ def clipboard_copy(text):
 
 # Ask for the word to query
 def ask_word():
-	proc = Popen(f'dmenu -i -p "Define ({lang})" -fn config["font"]', stdout=PIPE, stdin=PIPE, shell=True, text=True)
+	proc = Popen(f'dmenu -i -p "Define ({lang})" -fn config["font"] {config["flags"]}', stdout=PIPE, stdin=PIPE, shell=True, text=True)
 	ans = proc.communicate("")[0].strip().lower()
 	
 	if ans == "":
