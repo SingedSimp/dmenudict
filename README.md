@@ -13,11 +13,11 @@ You will need to create a JSON file named `creds.json` in the cloned repo. This 
 
 It's necessary to provide the language code as an argument:
 
-`/path/to/rofidict.py en` 
+`/path/to/dmenudict.py en` 
 
 (For english definitions)
 
-`/path/to/rofidict.py es` 
+`/path/to/dmenudict.py es` 
 
 (For spanish definitions)
 
