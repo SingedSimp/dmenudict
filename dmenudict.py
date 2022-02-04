@@ -33,7 +33,7 @@ def get_all_definitions(results):
 
 # Display definitions in Rofi
 def display_definitions(menu, title):
-	proc = Popen(f'dmenu -l 10 -i -p "{title}" -fn JetBrainsMono', stdout=PIPE, stdin=PIPE, shell=True, text=True)
+	proc = Popen(f'dmenu -l 10 -i -p "{title}" -fn {config["font"]}', stdout=PIPE, stdin=PIPE, shell=True, text=True)
 	ans = proc.communicate("\n".join(menu))[0].strip()
 
 	if ans == "":
@@ -43,12 +43,15 @@ def display_definitions(menu, title):
 
 # Send a string to the clipboard
 def clipboard_copy(text):
-	proc = Popen('xclip -sel clip -f', stdout=PIPE, stdin=PIPE, shell=True, text=True)
-	proc.communicate(text)
-	
+	if config["xclip"] == True:
+		proc = Popen('xclip -sel clip -f', stdout=PIPE, stdin=PIPE, shell=True, text=True)
+		proc.communicate(text)
+	else:
+		pass
+
 # Ask for the word to query
 def ask_word():
-	proc = Popen(f'dmenu -i -p "Define ({lang})" -fn JetBrainsMono', stdout=PIPE, stdin=PIPE, shell=True, text=True)
+	proc = Popen(f'dmenu -i -p "Define ({lang})" -fn config["font"]', stdout=PIPE, stdin=PIPE, shell=True, text=True)
 	ans = proc.communicate("")[0].strip().lower()
 	
 	if ans == "":
@@ -75,6 +78,14 @@ def get_creds():
 	with open(filepath, "r") as f:
 		creds = json.load(f)
 
+# Read configuration file
+def read_config():
+	global config
+	thispath = Path(__file__).parent.resolve()
+	filepath = Path(thispath) / Path("config.json")
+	with open(filepath, "r") as f:
+		config = json.load(f)
+
 # Main function
 def main():
 	global lang
@@ -86,6 +97,7 @@ def main():
 	lang = sys.argv[1]
 
 	get_creds()
+	read_config()
 	ask_word()
 
 if __name__ == "__main__":
