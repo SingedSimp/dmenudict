@@ -51,7 +51,7 @@ def clipboard_copy(text):
 
 # Ask for the word to query
 def ask_word():
-	proc = Popen(f'dmenu -i -p "Define ({lang})" -fn config["font"] {config["flags"]}', stdout=PIPE, stdin=PIPE, shell=True, text=True)
+	proc = Popen(f'dmenu -i -p "Define ({lang})" -fn {config["font"]} {config["flags"]}', stdout=PIPE, stdin=PIPE, shell=True, text=True)
 	ans = proc.communicate("")[0].strip().lower()
 	
 	if ans == "":
